@@ -8,10 +8,10 @@ Tactically, this will be an event driven application that “distributes” the 
 
 ## Links
 
-Github Actions: https://github.com/yazantafesh/api-server/actions
+Github Actions: https://github.com/yazantafesh/event-driven-apps-caps/actions
 
-Pull Request: https://github.com/yazantafesh/api-server/pull/3
+Pull Request: https://github.com/yazantafesh/event-driven-apps-caps/pull/1
 
 ## UML
 
-![UML](./UML-lab4.png)
+![UML](./uml.png)

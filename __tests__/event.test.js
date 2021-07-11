@@ -6,17 +6,15 @@ let store = process.env.STORE || 'CAPS';
 
 require('../driver');
 require('../vendor');
-
-setTimeout=jest.fn();
+require('../logger');
 
 describe('events handler tests', () => {
-    let consoleSpy;
+
     beforeEach(()=>{
-        consoleSpy = jest.spyOn(console,'log').mockImplementation();
+        jest.useFakeTimers();
+        jest.spyOn(global.console,'log');
       })
-      afterEach(()=>{
-        consoleSpy.mockRestore();
-      })
+
     let order = {
         orderId: uuid(),
         storeName: store,
@@ -25,14 +23,17 @@ describe('events handler tests', () => {
     }
     test('pick up handler test',() => {
         events.emit('pickup',order)
-        expect(setTimeout).toHaveBeenCalled();
+        jest.runAllTimers();
+        expect(console.log).toHaveBeenCalled();
     })
     test('delivered handler test',() => {
         events.emit('delivered',order)
-        expect(consoleSpy).toHaveBeenCalled();
+        expect(console.log).toHaveBeenCalled();
     })
     test('in-transit handler test',() => {
-        events.emit('intransit',order)
-        expect(setTimeout).toHaveBeenCalled();
+        events.emit('in-transit',order)
+        jest.runAllTimers();
+        expect(console.log).toHaveBeenCalled();
     })
 })
+
