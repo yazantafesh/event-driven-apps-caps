@@ -6,24 +6,20 @@ const faker = require('faker');
 const uuid = require('uuid').v4;
 
 
-setInterval(function() {
+let payload = {
 
-  let payload = {
-      
-    storeName : process.env.STORE,
-    orderId : uuid(),
-    customerName : faker.name.findName(),
-    address : faker.address.streetAddress()
-  }
-  
+  storeName: process.env.STORE,
+  orderId: uuid(),
+  customerName: faker.name.findName(),
+  address: faker.address.streetAddress()
+}
+
 events.emit('pickup', payload)
-
-}, 5000);
 
 
 events.on('delivered', deliveredHandler);
 
-function deliveredHandler(payload){
+function deliveredHandler(payload) {
   console.log(`VENDOR: Thank You for delivering ${payload.orderId}!`);
 }
 
