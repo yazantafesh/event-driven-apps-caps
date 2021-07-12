@@ -15,6 +15,10 @@ describe('events handler tests', () => {
         jest.spyOn(global.console,'log');
       })
 
+      afterEach(()=>{
+        jest.clearAllTimers()
+      })
+
     let order = {
         orderId: uuid(),
         storeName: store,
